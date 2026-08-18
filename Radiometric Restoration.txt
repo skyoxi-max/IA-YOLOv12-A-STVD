@@ -1,0 +1,21 @@
+import json
+
+class TaxonomicUnification:
+    """
+    Maps heterogeneous class labels (COCO, IDD, Cityscapes) to a unified taxonomy
+    inspired by the MSeg framework to eliminate semantic aliasing.
+    """
+    def __init__(self, mapping_file="data/taxonomy_mapping.json"):
+        # Example Unified Taxonomies:
+        # Autorickshaw / Van / Car -> Three-Wheeler / Light Vehicle
+        self.unified_map = {
+            "auto_rickshaw": "Three-Wheeler",
+            "e_rickshaw": "Three-Wheeler",
+            "car": "Light Vehicle",
+            "van": "Light Vehicle",
+            "motorcycle": "Two-Wheeler",
+            "scooter": "Two-Wheeler"
+        }
+
+    def map_label(self, original_label):
+        return self.unified_map.get(original_label.lower(), "Unclassified")
